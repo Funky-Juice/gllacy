@@ -63,3 +63,26 @@
     }
   });
 }());
+
+(function() {
+  var loginForm = document.querySelector('.login-field form');
+
+  if (!loginForm) {
+    return;
+  }
+
+  loginForm.addEventListener('submit', function(evt) {
+    evt.preventDefault();
+
+    fetch(loginForm.action, {
+      method: 'POST',
+      body: new FormData(loginForm)
+    })
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        alert(text);
+      });
+  });
+}());
