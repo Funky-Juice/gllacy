@@ -224,6 +224,20 @@ textarea:focus {
     word-wrap: break-word;    
 }
 
+.header-menu-catalog::after {
+    content: "";
+    position: absolute;
+    top: calc(100% + 0px);
+    left: calc(100% - 16px);
+    width: 30px;
+    height: 40px;
+    pointer-events: none;
+    z-index: 3;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 20'%3E%3Cpath fill='%23e74a35' stroke='%23ffffff' stroke-width='1' stroke-linejoin='round' d='M1.8 1.2 L1.8 14.6 L5.6 11.2 L8.1 17.2 L10.3 16.2 L7.8 10.2 L13.2 9.9 Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .header-menu > li:hover {
     background: #f7f6f3;
     border-radius: 20px;    
@@ -258,7 +272,7 @@ textarea:focus {
     padding: 0;
     left: -5px;
     padding-top: 5px;
-    z-index: 1;
+    z-index: 4;
 }
 
 .header-sub-menu {  
