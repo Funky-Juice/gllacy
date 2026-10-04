@@ -1,10 +1,18 @@
 'use strict';
 
 function sendFormToAlert(form) {
-  fetch(form.action, {
-    method: 'POST',
-    body: new FormData(form)
-  })
+  var method = form.method.toUpperCase();
+  var url = form.action;
+  var options = { method: method };
+
+  if (method === 'GET') {
+    var params = new URLSearchParams(new FormData(form));
+    url += (url.indexOf('?') === -1 ? '?' : '&') + params.toString();
+  } else {
+    options.body = new FormData(form);
+  }
+
+  fetch(url, options)
     .then(function(response) {
       return response.text();
     })
@@ -81,6 +89,7 @@ function sendFormToAlert(form) {
 
 (function() {
   var forms = [
+    document.querySelector('.header-search form'),
     document.querySelector('.login-field form'),
     document.querySelector('.subscribe-form form')
   ];
