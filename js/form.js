@@ -25,6 +25,11 @@ function sendFormToAlert(form) {
   var link = document.querySelector('.contacts-info-button');
   var popup = document.querySelector('.feedback-form');
   var overlay = document.querySelector('.feedback-form-overlay');
+
+  if (!link || !popup || !overlay) {
+    return;
+  }
+
   var close = popup.querySelector('.feedback-form-close');
   var form = popup.querySelector('form');
   var username = popup.querySelector('[name=username]');
@@ -91,7 +96,8 @@ function sendFormToAlert(form) {
   var forms = [
     document.querySelector('.header-search form'),
     document.querySelector('.login-field form'),
-    document.querySelector('.subscribe-form form')
+    document.querySelector('.subscribe-form form'),
+    document.querySelector('.filter-form')
   ];
 
   forms.forEach(function(form) {
