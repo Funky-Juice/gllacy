@@ -1,5 +1,18 @@
 'use strict';
 
+function sendFormToAlert(form) {
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form)
+  })
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      alert(text);
+    });
+}
+
 (function() {
   var link = document.querySelector('.contacts-info-button');
   var popup = document.querySelector('.feedback-form');
@@ -37,11 +50,13 @@
     if (!username.value || !email.value || !comment.value) {
         evt.preventDefault();
         popup.classList.remove('feedback-form-error');
-        popup.offsetWidth = popup.offsetWidth;
+        popup.offsetWidth;
         popup.classList.add('feedback-form-error');
     } else {
+      evt.preventDefault();
       localStorage.setItem('username', username.value);
       localStorage.setItem('email', email.value);
+      sendFormToAlert(form);
     }
   });
 
@@ -65,24 +80,19 @@
 }());
 
 (function() {
-  var loginForm = document.querySelector('.login-field form');
+  var forms = [
+    document.querySelector('.login-field form'),
+    document.querySelector('.subscribe-form form')
+  ];
 
-  if (!loginForm) {
-    return;
-  }
+  forms.forEach(function(form) {
+    if (!form) {
+      return;
+    }
 
-  loginForm.addEventListener('submit', function(evt) {
-    evt.preventDefault();
-
-    fetch(loginForm.action, {
-      method: 'POST',
-      body: new FormData(loginForm)
-    })
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(text) {
-        alert(text);
-      });
+    form.addEventListener('submit', function(evt) {
+      evt.preventDefault();
+      sendFormToAlert(form);
+    });
   });
 }());
